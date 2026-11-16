@@ -1,0 +1,216 @@
+/* ===== Base / layout ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--grafite);
+  border-bottom: 3px solid var(--ouro);
+}
+.header a { color: var(--cinza); text-decoration: none; margin-left: 1rem; }
+.header a.active { color: var(--ouro); }
+
+.pagina {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 0;
+}
+
+.titulo {
+  font-family: var(--fonte-titulo);
+  text-transform: uppercase;
+  margin: 0;
+}
+.subtitulo { color: var(--cinza); margin: 0.3rem 0 1.5rem; }
+
+h2 { font-family: var(--fonte-titulo); font-size: 1.1rem; }
+
+/* ===== Grades ===== */
+.grade-indicados {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  padding-top: 0.6rem;   /* espaço para o card "subir" sem cortar o outline */
+}
+
+.grade-elenco {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .grade-indicados { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .grade-indicados { grid-template-columns: 1fr; }
+}
+
+/* ===== Card ===== */
+.card {
+  position: relative;            /* referência para o selo absoluto */
+  display: flex;
+  flex-direction: column;
+  background: var(--grafite);
+  border: 2px solid var(--grafite-claro);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.25s ease, outline-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 0;        /* corta por baixo, rosto sempre visível */
+  display: block;
+}
+
+.card-info { padding: 0.7rem 0.9rem; }
+.card-numero { font-family: var(--fonte-titulo); color: var(--ouro); font-size: 1.4rem; }
+.card-nome { margin: 0.2rem 0; font-size: 1.05rem; }
+.card-posicao { margin: 0; color: var(--cinza); font-size: 0.9rem; }
+
+/* Situações */
+.card-indicado { border-color: var(--ouro); }
+.card-suspenso { border-color: var(--amarelo); }
+.card-elenco   { filter: grayscale(1); opacity: 0.85; }
+
+/* Selecionado */
+.card-selecionado {
+  outline: 5px solid var(--gramado);
+  outline-offset: 4px;
+  transform: translateY(-8px);
+}
+
+/* Selos */
+.selo {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  z-index: 1;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--preto);
+}
+.selo-indicado { background: var(--ouro); }
+.selo-suspenso { background: var(--amarelo); }
+
+/* ===== Botões ===== */
+button {
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
+  background: var(--grafite-claro);
+  color: var(--branco);
+  transition: background 0.2s, opacity 0.2s;
+}
+button:hover:not(:disabled) { background: var(--gramado); }
+
+.btn-selecionar {
+  margin: auto 0.9rem 0.9rem;     /* margin-top auto empurra o botão pro fim do card */
+  background: var(--branco);
+  color: var(--preto);
+}
+.card-selecionado .btn-selecionar { background: var(--gramado); color: var(--branco); }
+
+.btn-confirmar { background: var(--ouro); color: var(--preto); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-perigo { background: transparent; border: 2px solid var(--cinza); color: var(--cinza); }
+
+/* ===== Barra de confirmação ===== */
+.confirmacao {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--grafite);
+  border-top: 3px solid var(--ouro);
+  border-radius: 10px 10px 0 0;
+}
+.confirmacao p { margin: 0; }
+
+/* ===== Histórico ===== */
+.historico {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--grafite);
+  border-left: 4px solid var(--gramado);
+  border-radius: 8px;
+}
+.historico ol { padding-left: 1.3rem; }
+
+.link-resultado { color: var(--ouro); font-weight: 700; }
+
+.secao-elenco { margin: 2.5rem 0 3rem; }
+
+/* ===== Resultado ===== */
+.total { color: var(--cinza); }
+.disputa { font-size: 1.15rem; font-weight: 700; }
+
+.placar { list-style: none; padding: 0; display: grid; gap: 0.9rem; }
+
+.placar-item {
+  padding: 0.9rem 1rem;
+  background: var(--grafite);
+  border: 2px solid var(--grafite-claro);
+  border-radius: 10px;
+}
+.placar-topo { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+.placar-posicao { font-family: var(--fonte-titulo); font-size: 1.3rem; min-width: 2.2rem; }
+.placar-foto {
+  width: 48px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 6px;
+}
+.placar-nome { font-weight: 700; }
+.placar-numeros { margin-left: auto; color: var(--cinza); }
+
+.selo-placar {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--preto);
+  background: var(--cinza);
+}
+
+.barra {
+  height: 12px;
+  background: var(--grafite-claro);
+  border-radius: 999px;
+  overflow: hidden;               /* esconde o preenchimento fora do contêiner */
+}
+.barra-preenchida {
+  height: 100%;
+  background: var(--cinza);
+  transition: width 0.6s ease;    /* barra cresce suavemente */
+}
+
+/* Destaques */
+.placar-craque { border-color: var(--ouro); }
+.placar-craque .barra-preenchida,
+.placar-craque .selo-placar { background: var(--ouro); }
+
+.placar-vice { border-color: var(--prata); }
+.placar-vice .barra-preenchida,
+.placar-vice .selo-placar { background: var(--prata); }
+
+.acoes { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.5rem 0 3rem; }
+
+.vazio { padding: 2rem; text-align: center; background: var(--grafite); border-radius: 10px; }
