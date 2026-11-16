@@ -4,7 +4,7 @@ import {
   obterVotos,
   calcularResultado,
   desfazerUltimoVoto,
-  zerarVotacao,
+  zerarVotos,
 } from '../services/votacaoService';
 
 const plural = (n) => `${n} ${n === 1 ? 'voto' : 'votos'}`;
@@ -25,7 +25,7 @@ export default function Resultado() {
 
   function handleZerar() {
     if (window.confirm('Tem certeza que deseja zerar toda a votação?')) {
-      zerarVotacao();
+      zerarVotos();
       setVotos([]);
     }
   }
